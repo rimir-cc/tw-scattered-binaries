@@ -1,0 +1,11 @@
+{
+    "title": "$:/plugins/rimir/scattered-binaries",
+    "description": "Auto-discover and serve binary files from subdirectories via _canonical_uri",
+    "name": "scattered binaries",
+    "author": "rimir",
+    "version": "0.1.0",
+    "core-version": ">=5.3.0",
+    "source": "https://github.com/rimir-cc/tw-scattered-binaries",
+    "plugin-type": "plugin",
+    "list": "readme documentation settings changelog license"
+}

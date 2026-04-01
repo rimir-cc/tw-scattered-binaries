@@ -1,0 +1,13 @@
+title: $:/config/rimir/scattered-binaries/profiles
+type: application/json
+
+[
+    {
+        "basePath": "tiddlers/tender",
+        "dirPattern": "^#",
+        "subFolder": "documents",
+        "routePrefix": "/tender-docs",
+        "tiddlerPrefix": "tender",
+        "tag": "tender-source-document"
+    }
+]

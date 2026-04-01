@@ -1,0 +1,23 @@
+title: $:/plugins/rimir/scattered-binaries/settings
+type: text/vnd.tiddlywiki
+caption: scattered binaries
+
+<div class="rr-settings-section">
+
+!! Profiles
+
+Discovery profiles (JSON array). Each profile defines a directory structure to scan for binary files. Changes require a server restart.
+
+<$edit-text tiddler="$:/config/rimir/scattered-binaries/profiles" tag="textarea" class="rr-input" rows="12"/>
+
+!! Profile Fields
+
+|!Field |!Description |!Example |
+|`basePath` |Directory to scan (relative to wiki root) |`tiddlers/tender` |
+|`dirPattern` |Regex for subdirectory names to match |`^#` (matches `#512`, `#516`) |
+|`subFolder` |Subfolder within matched dirs containing binaries |`documents` |
+|`routePrefix` |HTTP route prefix for serving files |`/tender-docs` |
+|`tiddlerPrefix` |Tiddler title prefix |`tender` |
+|`tag` |Tag applied to created tiddlers |`tender-source-document` |
+
+</div>

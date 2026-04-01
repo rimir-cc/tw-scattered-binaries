@@ -1,0 +1,40 @@
+created: 20260401120000000
+modified: 20260401120000000
+rdt.hub-category: infrastructure
+rdt.hub-category-name: Infrastructure
+rdt.hub-order: 4
+rdt.order: 1
+rdt.plugin-key: scattered-binaries
+rdt.plugin-name: scattered binaries
+rdt.plugin-subtitle: Auto-discover and serve binary files from subdirectories
+rdt.section: Overview
+title: $:/plugins/rimir/scattered-binaries/doc/overview
+type: text/vnd.tiddlywiki
+
+<$transclude $tiddler="$:/plugins/rimir/doc-template/templates/page">
+<$fill $name="body">
+
+!! What it does
+
+Discovers binary files (PDF, DOCX, XLSX, images, etc.) in configured subdirectory structures and creates `_canonical_uri` tiddlers for them at boot. Files are served via a custom HTTP route — no manual `tiddlywiki.files` per directory needed.
+
+!! How it works
+
+# At boot, reads profile definitions from `$:/config/rimir/scattered-binaries/profiles`
+# For each profile, scans the configured base path for directories matching `dirPattern`
+# Within matched directories, recursively scans the `subFolder` for binary files
+# Cleans up any boot-loaded tiddlers with absolute filepath titles (TW boot scanner artifacts)
+# Creates `_canonical_uri` tiddlers with clean titles and configured tags
+# Stores profile data for the HTTP route module
+# The route module serves files on demand, with path traversal protection and extension filtering
+
+!! Security
+
+* Path traversal protection via `path.relative()` check on every request
+* Only files with known binary extensions are served (`.pdf`, `.docx`, `.xlsx`, etc.)
+* No directory listing — must know exact filename
+* `dirPattern` regex is validated at boot (malformed patterns are skipped with a warning)
+* Files with `.meta` sidecars are skipped (defers to TW's native handling)
+
+</$fill>
+</$transclude>
