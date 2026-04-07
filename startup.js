@@ -43,6 +43,9 @@ exports.startup = function() {
 	$tw.rimir = $tw.rimir || {};
 	$tw.rimir.scatteredBinaries = { profiles: [] };
 
+	// Check if file-upload is installed for optional location registration
+	var hasFileUpload = !!$tw.wiki.getTiddler("$:/plugins/rimir/file-upload");
+
 	for(var p = 0; p < profiles.length; p++) {
 		var profile = profiles[p];
 		if(!profile.basePath || !profile.routePrefix || !profile.tiddlerPrefix) {
@@ -80,6 +83,27 @@ exports.startup = function() {
 			subFolder: profile.subFolder || "documents"
 		};
 		$tw.rimir.scatteredBinaries.profiles.push(resolvedProfile);
+
+		// Optional: register with file-upload location registry
+		if(hasFileUpload) {
+			var locationTitle = "$:/config/rimir/file-upload/locations/" + profile.routePrefix.replace(/^\//, "");
+			// Don't overwrite existing location tiddler (user may have toggled writable)
+			if(!$tw.wiki.tiddlerExists(locationTitle)) {
+				$tw.wiki.addTiddler(new $tw.Tiddler({
+					title: locationTitle,
+					tags: "$:/tags/rimir/file-upload/location",
+					type: "application/json",
+					text: JSON.stringify({
+						name: profile.routePrefix.replace(/^\//, ""),
+						uriPrefix: profile.routePrefix + "/",
+						writable: false,
+						provider: "scattered-binaries",
+						basePath: profile.basePath,
+						subFolder: profile.subFolder || "documents"
+					})
+				}));
+			}
+		}
 
 		// Clean up boot-loaded absolute-filepath tiddlers
 		var cleanedUp = 0;

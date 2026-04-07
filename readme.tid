@@ -13,6 +13,14 @@ Auto-discover binary files (PDF, DOCX, XLSX, etc.) scattered across subdirectori
 * ''Meta-sidecar aware'' — skips files that have `.meta` sidecars (defers to TW native handling)
 * ''Extension filtering'' — only known binary extensions are served (blocks `.env`, `.json`, etc.)
 
+!! Optional integration
+
+When ''file-upload'' is also installed:
+
+* Discovered locations are automatically registered with the location registry
+* Deleting/renaming a scattered-binary tiddler cascades to derived artifacts (extractions, summaries, etc.)
+* Locations can be toggled writable via file-upload's settings UI
+
 !! Prerequisites
 
 * TiddlyWiki 5.3.0+ (Node.js server edition)
