@@ -1,0 +1,11 @@
+{
+    "description": "Test edition for scattered-binaries",
+    "plugins": [
+        "tiddlywiki/jasmine",
+        "rimir/scattered-binaries"
+    ],
+    "themes": [
+        "tiddlywiki/vanilla",
+        "tiddlywiki/snowwhite"
+    ]
+}
